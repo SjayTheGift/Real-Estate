@@ -1,0 +1,120 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{% static 'assets/css/all.css' %}">
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="{% static 'assets/css/bootstrap.css' %}">
+  <!-- Lightbox -->
+  <link rel="stylesheet" href="{% static 'assets/css/lightbox.min.css' %}" >
+  <!-- Custom -->
+  <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+
+  <title>{% block head_title %}{% endblock %}</title>
+</head>
+<body>
+  <!-- Top Bar -->
+  <section id="top-bar" class="p-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <i class="fas fa-phone"></i> (021)-555-5555
+        </div>
+        <div class="col-md-4">
+          <i class="fas fa-envelope-open"></i> admin@zakasi.co.za
+        </div>
+        <div class="col-md-4">
+          <div class="social text-right">
+            <a href="#">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#">
+              <i class="fab fa-facebook"></i>
+            </a>
+            <a href="#">
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="#">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#">
+              <i class="fab fa-pinterest"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'home' %}">
+        <img src="{% static 'assets/img/logo.png' %}" class="logo" alt="">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <ul class="navbar-nav">
+          <li class="{% if request.resolver_match.url_name == 'home' %}active{% endif %} nav-item mr-3">
+            <a class="nav-link" href="{% url 'home' %}">Home</a>
+          </li>
+          <li class="{% if request.resolver_match.url_name == 'about' %}active {% endif %} nav-item mr-3">
+            <a class="nav-link" href="{% url 'about' %}">About</a>
+          </li>
+          <li class="{% if request.resolver_match.url_name == 'listings' %}active {% endif %} nav-item mr-3">
+            <a class="nav-link" href="{% url 'listings' %}">Featured Listings</a>
+          </li>
+        </ul>
+
+        <ul class="navbar-nav ml-auto">
+            {% if user.is_authenticated %}
+          <li class="{% if request.resolver_match.url_name == 'account_signup' %}active {% endif %} nav-item mr-3">
+            <a class="nav-link" href="{% url 'profile' %}">
+              <i class="fa fa-user" aria-hidden="true"></i> Profile</a>
+          </li>
+          <li class="{% if request.resolver_match.url_name == 'account_login' %}active {% endif %} nav-item mr-3">
+            <a class="nav-link" href="{% url 'account_logout' %}">
+              <i class='fas fa-sign-out-alt'></i>
+
+              Logout</a>
+          </li>
+            {% else %}
+            <li class="{% if request.resolver_match.url_name == 'account_signup' %}active {% endif %} nav-item mr-3">
+            <a class="nav-link" href="{% url 'account_signup' %}">
+              <i class="fas fa-user-plus"></i> Register</a>
+          </li>
+          <li class="{% if request.resolver_match.url_name == 'account_login' %}active {% endif %} nav-item mr-3">
+            <a class="nav-link" href="{% url 'account_login' %}">
+              <i class="fas fa-sign-in-alt"></i>
+
+              Login</a>
+          </li>
+            {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  {% block content %}
+
+  {% endblock %}
+
+    <!-- Footer -->
+  <footer id="main-footer" class="py-4 bg-primary text-white text-center">
+    Copyright &copy
+    <span class="year"></span> Zakasi Real Estate
+  </footer>
+
+  <script src="{% static 'assets/js/jquery-3.3.1.min.js' %}"></script>
+  <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/js/lightbox.min.js' %}"></script>
+  <script src="{% static 'assets/js/main.js' %}"></script>
+</body>
+</html>
