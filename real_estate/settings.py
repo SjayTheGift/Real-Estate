@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
+import json
 import os
 from pathlib import Path
 from decouple import config
@@ -22,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '*pv$qf_r-!#**lldxw5du3yrds0ma%^2+*v7l6s6i0imevf^o9'
+SECRET_KEY = os.environ['SECRET_KEY_ENV']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -90,12 +91,13 @@ WSGI_APPLICATION = 'real_estate.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'realestate',
-        'USER': 'realuser',
-        'PASSWORD': 'password',
+        'NAME': "realestate",
+        'USER': "realuser",
+        'PASSWORD': "password",
         'HOST': 'localhost',
         'PORT': '',
     }
